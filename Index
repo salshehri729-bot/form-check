@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FormCheck AI — Technique Analysis</title>
+<meta name="description" content="Upload a lift and get instant, color-coded feedback on your technique before it becomes an injury.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <div class="brand">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__name">FormCheck<span class="brand__ai">AI</span></span>
+    </div>
+
+    <nav class="exercise-tabs" role="tablist" aria-label="Exercise type">
+      <button class="tab is-active" role="tab" aria-selected="true" data-exercise="squat">Squat</button>
+      <button class="tab" role="tab" aria-selected="false" data-exercise="deadlift">Deadlift</button>
+      <button class="tab" role="tab" aria-selected="false" data-exercise="bench">Bench Press</button>
+    </nav>
+
+    <div class="profile" aria-hidden="true">
+      <div class="profile__avatar">JL</div>
+    </div>
+  </div>
+</header>
+
+<main class="dashboard">
+  <section class="panel upload-panel" aria-labelledby="upload-heading">
+    <h2 id="upload-heading" class="panel__title">Your lift</h2>
+
+    <div class="dropzone" id="dropzone" tabindex="0" role="button"
+         aria-label="Upload a photo or video of your lift">
+      <input type="file" id="fileInput" accept="image/png, image/jpeg, video/mp4, video/quicktime" hidden>
+
+      <div class="dropzone__empty" id="dropzoneEmpty">
+        <svg class="dropzone__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M24 6v24M24 6l-8 8M24 6l8 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 30v6a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4v-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p class="dropzone__title">Drop your squat here</p>
+        <p class="dropzone__hint">or click to browse — MP4, MOV, JPG, PNG</p>
+      </div>
+
+      <div class="dropzone__preview" id="dropzonePreview" hidden>
+        <video id="previewVideo" hidden controls playsinline></video>
+        <img id="previewImage" hidden alt="Uploaded lift for analysis">
+        <button class="pill-btn dropzone__replace" id="replaceBtn" type="button">Replace file</button>
+      </div>
+    </div>
+
+    <p class="upload-status" id="uploadStatus" aria-live="polite"></p>
+  </section>
+
+  <section class="panel analysis-panel" aria-labelledby="analysis-heading">
+    <div class="analysis-panel__head">
+      <h2 id="analysis-heading" class="panel__title">AI analysis</h2>
+      <div class="score" id="scoreWrap" hidden>
+        <svg class="score__ring" viewBox="0 0 80 80" aria-hidden="true">
+          <circle class="score__track" cx="40" cy="40" r="34"></circle>
+          <circle class="score__value" id="scoreCircle" cx="40" cy="40" r="34"></circle>
+        </svg>
+        <div class="score__text">
+          <span class="score__number" id="scoreNumber">0</span>
+          <span class="score__label">form score</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="analysis-empty" id="analysisEmpty">
+      <p>Upload a lift to see your breakdown here.</p>
+      <p class="analysis-empty__sub">We'll flag what's solid and what puts you at risk, joint by joint.</p>
+    </div>
+
+    <ul class="checklist" id="checklist" hidden></ul>
+
+    <button class="primary-btn" id="analyzeBtn" hidden type="button">Analyze another set</button>
+  </section>
+
+  <section class="panel history-panel" aria-labelledby="history-heading">
+    <h2 id="history-heading" class="panel__title">Recent sessions</h2>
+    <div class="history-list" id="historyList"></div>
+  </section>
+</main>
+
+<footer class="footnote">
+  <p>Demo build — feedback is simulated. Connect a pose-estimation model (e.g. MediaPipe) in <code>js/script.js</code> to power this with real analysis.</p>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
